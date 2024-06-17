@@ -142,10 +142,10 @@ if mopset.reduce == 'y':
                             fil = file[1:-8]
 
                             if method == 'single_camera':
-                                date,mjd,date_time,wave,aperture_size,gain,rotskypa,rotang,wcs_err,seeing,pho,s1_src,s1_src_err,inst_src,inst_src_err,s1_cal,s1_cal_err,inst_cal,inst_cal_err,q_avg,q_err,u_avg,u_err,bkg,x,y = mopfunc.one_cam_polarimetry(fil,'1',source)
+                                date,mjd,date_time,wave,aperture_size,gain,rotskypa,rotang,wcs_err,seeing,pho,s1_src,s1_src_err,inst_src,inst_src_err,s1_cal,s1_cal_err,inst_cal,inst_cal_err,q_avg,q_err,u_avg,u_err,bkg,x,y = mopfunc.one_cam_polarimetry(fil,source)
                                 data_file.writerow({'date':date,'mjd':mjd,'datetime':date_time,'wave':wave,'ap_size':aperture_size,'gain':gain,'rotskypa':rotskypa,'rotang':rotang,'wcs_err':wcs_err,'seeing':seeing,'photometric':pho,'background':bkg,'x_pix':x,'y_pix':y,'counts_src':s1_src,'counts_src_err':s1_src_err,'inst_src':inst_src,'inst_src_err':inst_src_err,'counts_cal':s1_cal,'counts_cal_err':s1_cal_err,'inst_cal':inst_cal,'inst_cal_err':inst_cal_err,'q_avg':q_avg,'q_err':q_err,'u_avg':u_avg,'u_err':u_err})
                             if method == 'dual_camera':
-                                date,mjd,date_time,wave,aperture_size,gain,rotskypa,rotang,wcs_err,seeing,pho,counts_src,counts_src_err,inst_src,inst_src_err,counts_cal,counts_cal_err,inst_cal,inst_cal_err,q_avg,q_err,u_avg,u_err,bkg,x,y = mopfunc.two_cam_polarimetry(fil,'1',source)
+                                date,mjd,date_time,wave,aperture_size,gain,rotskypa,rotang,wcs_err,seeing,pho,counts_src,counts_src_err,inst_src,inst_src_err,counts_cal,counts_cal_err,inst_cal,inst_cal_err,q_avg,q_err,u_avg,u_err,bkg,x,y = mopfunc.two_cam_polarimetry(fil,source)
                                 data_file.writerow({'date':date,'mjd':mjd,'datetime':date_time,'wave':wave,'ap_size':aperture_size,'gain':gain,'rotskypa':rotskypa,'rotang':rotang,'wcs_err':wcs_err,'seeing':seeing,'photometric':pho,'background':bkg,'x_pix':x,'y_pix':y,'counts_src':counts_src,'counts_src_err':counts_src_err,'inst_src':inst_src,'inst_src_err':inst_src_err,'counts_cal':counts_cal,'counts_cal_err':counts_cal_err,'inst_cal':inst_cal,'inst_cal_err':inst_cal_err,'q_avg':q_avg,'q_err':q_err,'u_avg':u_avg,'u_err':u_err})
                         
                         except Exception as e:
