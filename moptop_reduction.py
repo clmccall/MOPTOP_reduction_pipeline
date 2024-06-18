@@ -4,24 +4,19 @@ import moptop_dicts as mopinf
 import glob
 import pandas as pd
 import numpy as np
-import math
 import csv 
-import shutil
-import ast
 import os
-import scipy.stats as stats
 from pylab import *
-import warnings
 from IPython.display import clear_output
 from pathlib import Path
 from astropy.io import fits
-from astropy.utils.exceptions import AstropyWarning
 import re
-from matplotlib.ticker import AutoMinorLocator
-warnings.simplefilter('ignore', category=AstropyWarning)
-warnings.simplefilter("ignore", category=RuntimeWarning)
-pd.options.mode.chained_assignment = None  # default='warn'
-plt.rcParams.update({'figure.max_open_warning': 0})
+# import warnings
+# from astropy.utils.exceptions import AstropyWarning
+# warnings.simplefilter('ignore', category=AstropyWarning)
+# warnings.simplefilter("ignore", category=RuntimeWarning)
+# pd.options.mode.chained_assignment = None  # default='warn'
+# plt.rcParams.update({'figure.max_open_warning': 0})
 
 """
 Reduction loops, csv creation and vetting.
