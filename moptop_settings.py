@@ -2,12 +2,12 @@
 CHECK APERTURE SIZE FITS WELL BEOFORE REDUCING FULLY.
 """
 
-dir1 = '/Users/callummccall/Library/CloudStorage/OneDrive-LiverpoolJohnMooresUniversity/moptop_data/' 
+dir1 = '/Insert/File/Path/Here/' 
 #Path to where fits files are stored or where they are to be downloaded to. 
 #Files will be organised based on the "OBJECT" header.
-dir2 = '/Users/callummccall/Library/CloudStorage/OneDrive-LiverpoolJohnMooresUniversity/moptop_data/'
+dir2 = 'Insert/File/Path/Here/'
 #Path to where the final csvs are located 
-dir3 = '/Users/callummccall/Documents/PhD/Plots/MOPTOP/' 
+dir3 = '/Insert/File/Path/Here/'
 #Path to where the plots are to be saved
 
 single_camera_start = [59477] #List of MJD's when MOPTOP started operating with a single camera
