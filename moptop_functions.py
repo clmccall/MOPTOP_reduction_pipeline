@@ -514,6 +514,7 @@ def subtract_background(data, radius_factor=0.98, sigma=4.0, fwhm=3, threshold_f
     tuple: A tuple containing:
         - data (numpy.ndarray): The image data with background subtracted.
         - background (float): The estimated background value subtracted from the data.
+        - std (float): The standard deviation of the background.
 
     Description:
     This function performs the following steps:
@@ -574,7 +575,7 @@ def subtract_background(data, radius_factor=0.98, sigma=4.0, fwhm=3, threshold_f
         data -= median
         background = median
 
-    return data, background
+    return data, background, std
 
 def one_cam_photometry(filename, source):
     """
@@ -673,7 +674,7 @@ def one_cam_photometry(filename, source):
             cal_dec = mopinf.source_info[source]['cal_dec']
             
             #Background subtraction
-            data, background = subtract_background(data)
+            data, background, std = subtract_background(data)
 
             #Plot highlighting apertures on both source and cal star to check size and position on relevant objects
             star_coord = SkyCoord(ra,dec, unit=(u.hourangle, u.deg))
@@ -958,7 +959,7 @@ def two_cam_photometry(filename, source):
             cal_dec = mopinf.source_info[source]['cal_dec']
 
             #Background subtraction
-            data, background = subtract_background(data)
+            data, background, std = subtract_background(data)
 
             #Converts ra and dec to pixel coordinates for source
             star_coord = SkyCoord(ra,dec, unit=(u.hourangle, u.deg))
