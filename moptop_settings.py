@@ -38,5 +38,6 @@ optimum_aperture = 'y' #Whether or not to find the optimum aperture/annulus size
 replace = 'y' #If a file has already been reduced, whether or not to replace the old reduction with a new one (y/n)
 clear_dir1 = 'n' #Whether or not to clear the directory where the fits files are stored after they have been reduced (y/n)
 calculations = 'y' #Whether or not to perform the calculations to obtain calibrated values (y/n)
+evpa_steps = 3 #Number of previous points to be used in the weighted average un unwrapping the EVPA
 
 

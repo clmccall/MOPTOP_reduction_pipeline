@@ -114,8 +114,9 @@ if mopset.reduce == 'y':
                 datetime_string = f"{header['DATE']} {header['UTSTART']}"
                 dtime = datetime.datetime.strptime(datetime_string, "%Y-%m-%d %H:%M:%S.%f")
                 if mopset.replace == 'y':
-                    processed_datetimes = [dt for dt in processed_datetimes if dt != dtime]
-                    mopfunc.delete_row(mopset.dir1+source+'/reduced_data.csv', dtime)
+                    if os.path.exists(mopset.dir1+source+'/reduced_data.csv'):
+                        processed_datetimes = [dt for dt in processed_datetimes if dt != dtime]
+                        mopfunc.delete_row(mopset.dir1+source+'/reduced_data.csv', dtime)
                 if dtime in processed_datetimes:
                     tot += 1
                     print('Already Reduced:',np.round((tot)/len(file_list)*100,2),'%',source)
