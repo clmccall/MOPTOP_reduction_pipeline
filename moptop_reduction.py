@@ -29,9 +29,6 @@ if mopset.download_data == 'y':
     sources = mopfunc.down_recentdata(mopset.dir1,mopset.download_dates)
 else:
     sources = mopset.sources
-    for source in sources:
-        Path(mopset.dir2+source+'/').mkdir(parents=True, exist_ok=True)
-        Path(mopset.dir3+source+'/').mkdir(parents=True, exist_ok=True)
 
 mopfunc.sort_files(mopset.dir1)
 
@@ -233,7 +230,7 @@ if mopset.calculations == 'y':
             data = pd.concat([globals()[filt+'data'] for filt in filters], ignore_index=True)
             data = data.sort_values(by=['mjd'])
             data = data.reset_index(drop=True)
-            data.to_csv(mopset.dir2+source+'/all_data.csv',index=False)
+            data.to_csv(mopset.dir1+source+'/all_data.csv',index=False)
 
         except:   
             continue

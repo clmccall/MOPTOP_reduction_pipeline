@@ -4,11 +4,8 @@ CHECK APERTURE SIZE FITS WELL BEOFORE REDUCING FULLY.
 
 dir1 = '/Insert/File/Path/Here/' 
 #Path to where fits files are stored or where they are to be downloaded to. 
-#Files will be organised based on the "OBJECT" header.
-dir2 = 'Insert/File/Path/Here/'
-#Path to where the final csvs are located 
-dir3 = '/Insert/File/Path/Here/'
-#Path to where the plots are to be saved
+#Files will be organised based on the "OBJECT" header
+#Final and intermediate csv files are saved in the crerated source directories.
 
 single_camera_start = [59477] #List of MJD's when MOPTOP started operating with a single camera
 single_camera_end = [59654] #List of MJD's when MOPTOP resumed operating with both cameras

@@ -129,8 +129,6 @@ def down_recentdata(path,days):
                             source = header['OBJECT']
                             name = reverse_index.get(source)
 
-                            Path(mopset.dir2+name+'/').mkdir(parents=True, exist_ok=True)
-
                             if os.path.exists(mopset.dir1+name+'/'+file):
                                 os.remove(mopset.dir1+name+'/'+file)
                             shutil.move(mopset.dir1+file,mopset.dir1+name+'/')
