@@ -9,7 +9,7 @@ from astropy.coordinates import SkyCoord
 from astropy.wcs import WCS
 import astropy.units as u
 import matplotlib.pyplot as plt
-from photutils import aperture_photometry, CircularAperture, CircularAnnulus
+from photutils.aperture import aperture_photometry, CircularAperture, CircularAnnulus
 from astropy.stats import sigma_clipped_stats
 from astropy.visualization import ZScaleInterval,ImageNormalize,SqrtStretch
 from photutils.utils import calc_total_error
@@ -19,11 +19,10 @@ import csv
 import glob
 import os
 from datetime import datetime
-from pathlib import Path
 import requests
 import re
 import shutil
-from photutils import DAOStarFinder
+from photutils.detection import DAOStarFinder
 
 def down_recentdata(path,days):
     """
