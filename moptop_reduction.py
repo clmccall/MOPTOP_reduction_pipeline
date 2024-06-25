@@ -8,15 +8,8 @@ import csv
 import os
 from pylab import *
 from IPython.display import clear_output
-from pathlib import Path
 from astropy.io import fits
 import re
-# import warnings
-# from astropy.utils.exceptions import AstropyWarning
-# warnings.simplefilter('ignore', category=AstropyWarning)
-# warnings.simplefilter("ignore", category=RuntimeWarning)
-# pd.options.mode.chained_assignment = None  # default='warn'
-# plt.rcParams.update({'figure.max_open_warning': 0})
 
 """
 Reduction loops, csv creation and vetting.
@@ -207,12 +200,12 @@ if mopset.calculations == 'y':
 
             for i in range(len(data)):
                 p_mas,p_min,p_max= mopfunc.novel_pol_error(data['q'][i],data['q_err'][i], data['u'][i],data['u_err'][i])
-                data['pol'][i] = p_mas/data['inst_depol'][i]
-                data['pol_err'][i] = ((p_max - p_min)/2)/data['inst_depol'][i]
+                data.loc[i, 'pol'] = p_mas/data['inst_depol'][i]
+                data.loc[i, 'pol_err'] = ((p_max - p_min)/2)/data['inst_depol'][i]
 
                 theta, theta_err = mopfunc.EVPA(data['q'][i],data['q_err'][i], data['u'][i],data['u_err'][i])
-                data['evpa'][i] = (data['rotskypa'][i]+theta+data['k'][i]) % 180.0
-                data['evpa_err'][i] = theta_err
+                data.loc[i, 'evpa'] = (data['rotskypa'][i]+theta+data['k'][i]) % 180.0
+                data.loc[i, 'evpa_err'] = theta_err
 
             data['q_cor'] = data['pol']*np.cos(np.radians(data['evpa'])*2)
             data['u_cor'] = data['pol']*np.sin(np.radians(data['evpa'])*2)

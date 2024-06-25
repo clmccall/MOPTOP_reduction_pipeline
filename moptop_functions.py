@@ -6,7 +6,7 @@ import pandas as pd
 from astropy.io import fits
 import scipy.stats as ss
 from astropy.coordinates import SkyCoord
-from astropy.wcs import WCS
+from astropy.wcs import WCS, FITSFixedWarning
 import astropy.units as u
 import matplotlib.pyplot as plt
 from photutils.aperture import aperture_photometry, CircularAperture, CircularAnnulus
@@ -23,6 +23,9 @@ import requests
 import re
 import shutil
 from photutils.detection import DAOStarFinder
+from pathlib import Path
+import warnings
+warnings.filterwarnings("ignore", category=FITSFixedWarning)
 
 def down_recentdata(path,days):
     """
@@ -128,6 +131,7 @@ def down_recentdata(path,days):
                             source = header['OBJECT']
                             name = reverse_index.get(source)
 
+                            os.makedirs(mopset.dir1+name, exist_ok=True)
                             if os.path.exists(mopset.dir1+name+'/'+file):
                                 os.remove(mopset.dir1+name+'/'+file)
                             shutil.move(mopset.dir1+file,mopset.dir1+name+'/')

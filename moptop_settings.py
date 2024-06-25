@@ -19,7 +19,7 @@ no_wcs_sources = ['MRK421','SN2023ixf'] #List of sources that frequently do not 
                             #User will be asked to manually select the target and calibration star using R band image.
 
 download_data = 'y' #Download data from "Recent Data" (y/n)
-download_dates = ['20240602'] #Dates to download data for (YYYYMMDD)
+download_dates = ['yyyymmdd'] #Dates to download data for (YYYYMMDD)
 proposals = [{'ID':['PASSWORD']}] #Proposal iDs and passwords
 
 time_frame = '*'    #If you want to reduce specific files, enter the fits file date and run number here.
