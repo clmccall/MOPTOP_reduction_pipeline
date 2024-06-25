@@ -150,7 +150,8 @@ if mopset.reduce == 'y':
             data = data.sort_values(by=['mjd'])
             data = data.reset_index(drop=True)
             data.to_csv(mopset.dir1+source+'/reduced_data.csv',index=False)
-        except:
+        except Exception as e:
+            print(e)
             continue
         
 if mopset.clear_dir1 == 'y':
@@ -232,5 +233,6 @@ if mopset.calculations == 'y':
             data = data.reset_index(drop=True)
             data.to_csv(mopset.dir1+source+'/all_data.csv',index=False)
 
-        except:   
+        except Exception as e:
+            print(e)
             continue
