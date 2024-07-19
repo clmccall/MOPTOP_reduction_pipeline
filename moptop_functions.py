@@ -1458,9 +1458,9 @@ def evpa_unwrap(evpa, evpa_err, n):
 
         #Performs the necessary shift
         if abs(diff) - err > 90 and diff < 0:
-            evpa[i] += N*180
+            evpa.loc[i] += N*180
         if abs(diff) - err > 90 and diff > 0:
-            evpa[i] -= N*180
+            evpa.loc[i] -= N*180
 
     evpa_cor = evpa.reset_index(drop=True)
     return evpa_cor
