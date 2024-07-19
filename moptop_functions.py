@@ -187,6 +187,7 @@ def sort_files(path):
 
             if os.path.exists(mopset.dir1+name+'/'+file):
                 os.remove(mopset.dir1+name+'/'+file)
+            os.makedirs(mopset.dir1+name, exist_ok=True)
             shutil.move(mopset.dir1+file,mopset.dir1+name+'/')
             tot += 1
             print(f"sorting files: {(tot/(len(files)))*100:.2f} %")
