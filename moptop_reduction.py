@@ -10,6 +10,7 @@ from pylab import *
 from IPython.display import clear_output
 from astropy.io import fits
 import re
+import copy
 
 """
 Reduction loops, csv creation and vetting.
@@ -219,7 +220,9 @@ if mopset.calculations == 'y':
             filters = data['wave'].unique()
             for filt in filters:
                 globals()[filt+'data'] = data[data['wave'] == filt].reset_index(drop=True)
-                globals()[filt+'data']['evpa_cor'] = mopfunc.evpa_unwrap(globals()[filt+'data']['evpa'],globals()[filt+'data']['evpa_err'],mopset.evpa_steps)
+                evpa = copy.deepcopy(globals()[filt+'data']['evpa'])
+                evpa_err = copy.deepcopy(globals()[filt+'data']['evpa_err'])
+                globals()[filt+'data']['evpa_cor'] = mopfunc.evpa_unwrap(evpa,evpa_err,mopset.evpa_steps)
 
             data = pd.concat([globals()[filt+'data'] for filt in filters], ignore_index=True)
             data = data.sort_values(by=['mjd'])
