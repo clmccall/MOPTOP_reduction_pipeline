@@ -261,7 +261,7 @@ def no_wcs(path, source):
     """
 
     os.chdir(path)
-    files = glob.glob('*_e_'+mopset.time_frame+'_*_1_1.fits')
+    files = glob.glob('*_*_'+mopset.time_frame+'_*_1_1.fits')
     coord_frames = []
     for file in files:
         hdulist = fits.open(file)
