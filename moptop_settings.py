@@ -7,6 +7,7 @@ dir1 = '/Insert/File/Path/Here/'
 #Files will be organised based on the "OBJECT" header
 #Final and intermediate csv files are saved in the crerated source directories.
 
+change_pol_constants = [59477, 59654, 60561] #List of MJD's when the polarisation constants changed
 single_camera_start = [59477] #List of MJD's when MOPTOP started operating with a single camera
 single_camera_end = [59654] #List of MJD's when MOPTOP resumed operating with both cameras
                             #If single camera mode is ongoing, enter a future MJD for the end date

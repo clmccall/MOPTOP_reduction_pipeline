@@ -159,37 +159,39 @@ if mopset.calculations == 'y':
             data = data.sort_values(by=['mjd'])
             data = data.reset_index(drop=True)
 
-            data['mag_src'] = data.apply(lambda row: mopinf.source_info[source][row['wave']+'mag_cal'] + row['inst_src'] - row['inst_cal'], axis=1)
-            data['mag_src_err'] = np.sqrt(data['inst_src_err']**2+data['inst_cal_err']**2)
+            try:
+                data['mag_src'] = data.apply(lambda row: mopinf.source_info[source][row['wave']+'mag_cal'] + row['inst_src'] - row['inst_cal'], axis=1)
+                data['mag_src_err'] = np.sqrt(data['inst_src_err']**2+data['inst_cal_err']**2)
 
-            data['mag_cal'] = data.apply(lambda row: mopinf.source_info[source][row['wave']+'mag_cal'], axis=1)
+                data['mag_cal'] = data.apply(lambda row: mopinf.source_info[source][row['wave']+'mag_cal'], axis=1)
 
-            data['flux_src_mJy'] = data.apply(lambda row: 10**23 * mopinf.flux_constants[row['wave']]['f'] * 10**(-row['mag_src']/2.5) * 1000, axis=1)
-            data['flux_src_mJy_err'] = np.log(10)/2.5 * data['flux_src_mJy'] * data['mag_src_err']
+                data['flux_src_mJy'] = data.apply(lambda row: 10**23 * mopinf.flux_constants[row['wave']]['f'] * 10**(-row['mag_src']/2.5) * 1000, axis=1)
+                data['flux_src_mJy_err'] = np.log(10)/2.5 * data['flux_src_mJy'] * data['mag_src_err']
+            except:
+                pass 
 
-            for i in range(1, len(mopset.single_camera_start) + 1):
-                mask_1 = data['mjd'] < mopset.single_camera_start[i - 1]
-                mask_2 = (data['mjd'] >= mopset.single_camera_start[i - 1]) & (data['mjd'] < mopset.single_camera_end[i - 1])
-                mask_3 = data['mjd'] >= mopset.single_camera_end[i - 1]
-
-                key_1 = f'2cam_{i}'
-                key_2 = f'1cam_{i}'
-                key_3 = f'2cam_{i + 1}'
-
-                data.loc[mask_1, 'q_zero'] = data.loc[mask_1].apply(lambda row: mopinf.polarimetric_constants[f'q_zero_{row["wave"]}_{key_1}'], axis=1)
-                data.loc[mask_1, 'u_zero'] = data.loc[mask_1].apply(lambda row: mopinf.polarimetric_constants[f'u_zero_{row["wave"]}_{key_1}'], axis=1)
-                data.loc[mask_1, 'k'] = data.loc[mask_1].apply(lambda row: mopinf.polarimetric_constants[f'k_{row["wave"]}_{key_1}'], axis=1)
-                data.loc[mask_1, 'inst_depol'] = data.loc[mask_1].apply(lambda row: mopinf.polarimetric_constants[f'inst_depol_{row["wave"]}_{key_1}'], axis=1)
-
-                data.loc[mask_2, 'q_zero'] = data.loc[mask_2].apply(lambda row: mopinf.polarimetric_constants[f'q_zero_{row["wave"]}_{key_2}'], axis=1)
-                data.loc[mask_2, 'u_zero'] = data.loc[mask_2].apply(lambda row: mopinf.polarimetric_constants[f'u_zero_{row["wave"]}_{key_2}'], axis=1)
-                data.loc[mask_2, 'k'] = data.loc[mask_2].apply(lambda row: mopinf.polarimetric_constants[f'k_{row["wave"]}_{key_2}'], axis=1)
-                data.loc[mask_2, 'inst_depol'] = data.loc[mask_2].apply(lambda row: mopinf.polarimetric_constants[f'inst_depol_{row["wave"]}_{key_2}'], axis=1)
-
-                data.loc[mask_3, 'q_zero'] = data.loc[mask_3].apply(lambda row: mopinf.polarimetric_constants[f'q_zero_{row["wave"]}_{key_3}'], axis=1)
-                data.loc[mask_3, 'u_zero'] = data.loc[mask_3].apply(lambda row: mopinf.polarimetric_constants[f'u_zero_{row["wave"]}_{key_3}'], axis=1)
-                data.loc[mask_3, 'k'] = data.loc[mask_3].apply(lambda row: mopinf.polarimetric_constants[f'k_{row["wave"]}_{key_3}'], axis=1)
-                data.loc[mask_3, 'inst_depol'] = data.loc[mask_3].apply(lambda row: mopinf.polarimetric_constants[f'inst_depol_{row["wave"]}_{key_3}'], axis=1)
+            def get_coefficients(mjd, filter, mjd_list):
+                # Determine the correct epoch based on the MJD value
+                if mjd < mjd_list[0]:
+                    epoch = 1
+                elif mjd >= mjd_list[-1]:
+                    epoch = len(mjd_list) + 1
+                else:
+                    for i in range(len(mjd_list) - 1):
+                        if mjd_list[i] <= mjd < mjd_list[i+1]:
+                            epoch = i + 2
+                            break
+                
+                # Dynamically evaluate the coefficient variables based on the epoch
+                q_zero = mopinf.polarimetric_constants[f'q_zero_{filter}_{epoch}']
+                u_zero = mopinf.polarimetric_constants[f'u_zero_{filter}_{epoch}']
+                k = mopinf.polarimetric_constants[f'k_{filter}_{epoch}']
+                inst_depol = mopinf.polarimetric_constants[f'inst_depol_{filter}_{epoch}'] 
+                
+                return q_zero, u_zero, k, inst_depol
+            
+            for i in range(len(data['mjd'])):
+                data['q_zero'], data['u_zero'], data['k'], data['inst_depol'] = get_coefficients(data['mjd'][i],data['wave'][i], mopset.change_pol_constants)
 
             data['q'] = data['q_avg'] - data['q_zero']
             data['u'] = data['u_avg'] - data['u_zero']

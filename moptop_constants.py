@@ -1,20 +1,10 @@
 from calendar import c
-import moptop_settings as mopset_1
+import moptop_settings as mopset
 import moptop_dicts as mopinf
-import glob
 import pandas as pd
 import numpy as np
-import shutil
-import ast
-import scipy.stats as stats
-from astropy.stats import sigma_clip
-import csv 
-import os
 from pylab import *
 import warnings
-from IPython.display import clear_output
-from pathlib import Path
-from astropy.io import fits
 from scipy.optimize import curve_fit
 from astropy.utils.exceptions import AstropyWarning
 warnings.simplefilter('ignore', category=AstropyWarning)
@@ -26,7 +16,7 @@ zpol_sources = ['HD14069','BD+32 3739','GD319','HD212311','G191B2B','BD+28 4211'
 all_zpol_data = []
 for source in zpol_sources:
     try:
-        data = pd.read_csv(mopset_1.dir1+source+'/all_data.csv')
+        data = pd.read_csv(mopset.dir1+source+'/all_data.csv')
         data = data[data['photometric']=="PHOTOMETRIC"]
         data['Source'] = source
         all_zpol_data.append(data)
@@ -36,13 +26,13 @@ combined_zpol_data = pd.concat(all_zpol_data, ignore_index=True)
 combined_zpol_data['epoch'] = np.nan
 
 for i in range(len(combined_zpol_data['mjd'])):
-    if combined_zpol_data['mjd'][i] < mopset_1.change_pol_constants[0]:
+    if combined_zpol_data['mjd'][i] < mopset.change_pol_constants[0]:
         combined_zpol_data['epoch'][i] = 1
-    elif combined_zpol_data['mjd'][i] >= mopset_1.change_pol_constants[-1]:
-        combined_zpol_data['epoch'][i] = len(mopset_1.change_pol_constants)+1
+    elif combined_zpol_data['mjd'][i] >= mopset.change_pol_constants[-1]:
+        combined_zpol_data['epoch'][i] = len(mopset.change_pol_constants)+1
     else:
-        for j in range(len(mopset_1.change_pol_constants) - 1):
-            if mopset_1.change_pol_constants[j] <= combined_zpol_data['mjd'][i] < mopset_1.change_pol_constants[j+1]:
+        for j in range(len(mopset.change_pol_constants) - 1):
+            if mopset.change_pol_constants[j] <= combined_zpol_data['mjd'][i] < mopset.change_pol_constants[j+1]:
                 combined_zpol_data['epoch'][i] = j + 2
                 break
 
@@ -66,7 +56,7 @@ print(qu_zero)
 all_pol_data = []
 for source in pol_sources:
     try:
-        data = pd.read_csv(mopset_1.dir1+source+'/all_data.csv')
+        data = pd.read_csv(mopset.dir1+source+'/all_data.csv')
         data = data[data['photometric']=="PHOTOMETRIC"]
         data['Source'] = source
         all_pol_data.append(data)
@@ -76,13 +66,13 @@ combined_pol_data = pd.concat(all_pol_data, ignore_index=True)
 combined_pol_data['epoch'] = np.nan
 
 for i in range(len(combined_pol_data['mjd'])):
-    if combined_pol_data['mjd'][i] < mopset_1.change_pol_constants[0]:
+    if combined_pol_data['mjd'][i] < mopset.change_pol_constants[0]:
         combined_pol_data['epoch'][i] = 1
-    elif combined_pol_data['mjd'][i] >= mopset_1.change_pol_constants[-1]:
-        combined_pol_data['epoch'][i] = len(mopset_1.change_pol_constants)+1
+    elif combined_pol_data['mjd'][i] >= mopset.change_pol_constants[-1]:
+        combined_pol_data['epoch'][i] = len(mopset.change_pol_constants)+1
     else:
-        for j in range(len(mopset_1.change_pol_constants) - 1):
-            if mopset_1.change_pol_constants[j] <= combined_pol_data['mjd'][i] < mopset_1.change_pol_constants[j+1]:
+        for j in range(len(mopset.change_pol_constants) - 1):
+            if mopset.change_pol_constants[j] <= combined_pol_data['mjd'][i] < mopset.change_pol_constants[j+1]:
                 combined_pol_data['epoch'][i] = j + 2
                 break
 
