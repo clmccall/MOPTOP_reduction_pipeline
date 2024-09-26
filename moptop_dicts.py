@@ -361,7 +361,7 @@ source_info = {
         "Lmag_cal" : 0,
     },
     "HD14069" : {
-        "alt_names" : [],
+        "alt_names" : ['HD14069_zpol'],
         "aperture_size" : 8,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -369,7 +369,7 @@ source_info = {
         "dec" : "+07 41 10.637",
     },
     "BD+32 3739" : {
-        "alt_names" : ['BDp32_3739'],
+        "alt_names" : ['BDp32_3739_zpol'],
         "aperture_size" : 11.5,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -379,7 +379,7 @@ source_info = {
         "cal_dec" : "0 0 0",
     },
     "GD319" : {
-        "alt_names" : [],
+        "alt_names" : ['GD319_zpol'],
         "aperture_size" : 10.5,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -387,7 +387,7 @@ source_info = {
         "dec" : "+55 06 01.800",
     },
     "HD212311" : {
-        "alt_names" : [],
+        "alt_names" : ['HD212311_zpol'],
         "aperture_size" : 10.5,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -395,7 +395,7 @@ source_info = {
         "dec" : "+56 31 52.718",
     },
     "G191B2B" : {
-        "alt_names" : [],
+        "alt_names" : ['G191B2B_zpol'],
         "aperture_size" : 7,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -403,7 +403,7 @@ source_info = {
         "dec" : "+52 49 51.919",
     },
     "BD+28 4211" : {
-        "alt_names" : [],
+        "alt_names" : ['BDp28_4211_zpol'],
         "aperture_size" : 10,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -411,7 +411,7 @@ source_info = {
         "dec" : "+28 51 50.368",
     },
     "HD251204" : {
-        "alt_names" : [],
+        "alt_names" : ['HD251204_pol'],
         "aperture_size" : 4.5,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -429,7 +429,7 @@ source_info = {
         "per_p_act_L" : average([4.46,4.72,4.78,4.37]),
     },
     "BD+64 106" : {
-        "alt_names" : [],
+        "alt_names" : ['BDp64_106_pol'],
         "aperture_size" : 7.5,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -447,7 +447,7 @@ source_info = {
         "per_p_act_L" : average([5.506,5.687,5.150,4.696]),
     },
     "VICyg12" : {
-        "alt_names" : [],
+        "alt_names" : ['VICyg12_pol'],
         "aperture_size" : 5,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -465,7 +465,7 @@ source_info = {
         "per_p_act_L" : average([9.67,8.947,7.893,7.06]),
     },
     "HD155197" : {
-        "alt_names" : [],
+        "alt_names" : ['HD155197_pol'],
         "aperture_size" : 8,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -483,7 +483,7 @@ source_info = {
         "per_p_act_L" : average([4.112,4.320,4.274,3.906]),
     },
     "HILT960" : {
-        "alt_names" : [],
+        "alt_names" : ['HILT960_pol','HILT_960_pol'],
         "aperture_size" : 9,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
@@ -501,7 +501,7 @@ source_info = {
         "per_p_act_L" : average([5.720,5.663,5.210,4.455]),
     },
     "BD+57 2615" : {
-        "alt_names" : [],
+        "alt_names" : ['BDp57_2615_pol'],
         "aperture_size" : 4.5,
         "inner_annulus" : 1.5,
         "outer_annulus" : 2.5,
