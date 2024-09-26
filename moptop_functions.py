@@ -1011,6 +1011,7 @@ def two_cam_photometry(filename, source):
                 date = int(date)
                 run = int(run)+factor
                 positions = globals()[f'pix_coords_{cam}_{date}_{run}']
+                wcs_err = 0
 
             if mopset.optimum_aperture == 'y':
 
