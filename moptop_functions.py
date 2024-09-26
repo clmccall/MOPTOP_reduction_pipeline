@@ -304,8 +304,12 @@ def no_wcs(path, source):
 
         ra = mopinf.source_info[source]['ra']
         dec = mopinf.source_info[source]['dec']
-        cal_ra = mopinf.source_info[source]['cal_ra']
-        cal_dec = mopinf.source_info[source]['cal_dec']
+        try: 
+            cal_ra = mopinf.source_info[source]['cal_ra']
+            cal_dec = mopinf.source_info[source]['cal_dec']
+        except:
+            cal_ra = ra
+            cal_dec = dec
 
         mean, median, std = sigma_clipped_stats(data,sigma=4.0)
         data -= median
@@ -672,8 +676,12 @@ def one_cam_photometry(filename, source):
             #Extracts relevant coordinate information from dictionary
             ra = mopinf.source_info[source]['ra']
             dec = mopinf.source_info[source]['dec']
-            cal_ra = mopinf.source_info[source]['cal_ra']
-            cal_dec = mopinf.source_info[source]['cal_dec']
+            try:
+                cal_ra = mopinf.source_info[source]['cal_ra']
+                cal_dec = mopinf.source_info[source]['cal_dec']
+            except:
+                cal_ra = ra
+                cal_dec = dec
             
             #Background subtraction
             data, background, std = subtract_background(data)
@@ -957,8 +965,12 @@ def two_cam_photometry(filename, source):
             #Extracts relevant coordinate information from dictionary
             ra = mopinf.source_info[source]['ra']
             dec = mopinf.source_info[source]['dec']
-            cal_ra = mopinf.source_info[source]['cal_ra']
-            cal_dec = mopinf.source_info[source]['cal_dec']
+            try:
+                cal_ra = mopinf.source_info[source]['cal_ra']
+                cal_dec = mopinf.source_info[source]['cal_dec']
+            except:
+                cal_ra = ra
+                cal_dec = dec
 
             #Background subtraction
             data, background, std = subtract_background(data)
