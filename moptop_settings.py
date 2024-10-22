@@ -16,7 +16,7 @@ sources = ['BL Lac','OJ287','3C 454.3','4C 11.69','TXS 0506+056','PKS1510-089','
             #List of sources to reduce. Only applicable if download_data = 'n'
             #Source names as they appear in source info dict
 
-no_wcs_sources = ['MRK421','SN2023ixf'] #List of sources that frequently do not have WCS coordinates in the header.
+no_wcs_sources = ['MRK421','SN2023ixf','HD14069'] #List of sources that frequently do not have WCS coordinates in the header.
                             #User will be asked to manually select the target and calibration star using R band image.
 
 download_data = 'y' #Download data from "Recent Data" (y/n)
