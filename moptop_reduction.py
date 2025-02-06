@@ -153,7 +153,7 @@ if mopset.clear_dir1 == 'y':
 
 if mopset.calculations == 'y':
     for source in sources:
-        try:
+        # try:
             data = pd.read_csv(mopset.dir1+source+'/reduced_data.csv',header=0)
             data.dropna(subset=['q_avg', 'u_avg'],how='any',inplace=True)
             data = data.sort_values(by=['mjd'])
@@ -191,7 +191,7 @@ if mopset.calculations == 'y':
                 return q_zero, u_zero, k, inst_depol
             
             for i in range(len(data['mjd'])):
-                data['q_zero'], data['u_zero'], data['k'], data['inst_depol'] = get_coefficients(data['mjd'][i],data['wave'][i], mopset.change_pol_constants)
+                data.loc[i,'q_zero'], data.loc[i, 'u_zero'], data.loc[i, 'k'], data.loc[i, 'inst_depol'] = get_coefficients(data['mjd'][i],data['wave'][i], mopset.change_pol_constants)
 
             data['q'] = data['q_avg'] - data['q_zero']
             data['u'] = data['u_avg'] - data['u_zero']
@@ -231,6 +231,6 @@ if mopset.calculations == 'y':
             data = data.reset_index(drop=True)
             data.to_csv(mopset.dir1+source+'/all_data.csv',index=False)
 
-        except Exception as e:
-            print(e)
-            continue
+        # except Exception as e:
+        #     print(e)
+        #     continue
