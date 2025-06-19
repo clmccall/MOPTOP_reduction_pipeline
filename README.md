@@ -10,6 +10,7 @@ MOPTOP reduction pipeline
   <a href="#introduction">Introduction</a> |
   <a href="#file-summary">File summary</a> |
   <a href="#instructions">Instructions</a> |
+  <a href="#acknowledgments">Acknowledgments</a> |
   <a href="#contact">Contact</a>
 </p>
 
@@ -75,7 +76,37 @@ The main pipeline does not take into account the uncertainties on these constant
 
 ## Instructions 
 
+The only files that need configuring are the moptop_settings.py and moptop_dicts.py files. 
 
+### moptop_dicts.py 
+
+The following steps are compulsory to making the pipeline work. 
+
+Enter any new object parameters into the nested source_info dictionary. The framework can be copied from an existing object, such as BL Lac, and this source will be the example in this description. 
+
+The first entry is an alt_names list. This list should comprise any and all names this object takes in the OBJECT header of the fits files. Different astronomers will call objects by different names, so the purpose of this list to tell the script that frames of different object names are the same source (i.e. BL Lac = bl lac = BL LAC etc). The name of nested dictionary, BL Lac in this case, will be the "master name" which the folders the script creates will be named after.
+
+The next three fields are estimates for the aperture size and inner/outer annulus radii. The user will have the option to have a function refine these values so they need not be accurate.
+
+The remaining fields are source and calibration star RA/Dec coordinates, as well as the BVRIL magnitudes of the calibration star. If calibrated magnitude is not of interest, enter 0 for the magnitude values. The script will use the source coordinates if the calibration star coordinates are left blank.
+
+If new MOPTOP polarisation constants have been calculated following MOPTOP-altering telescope maintenance, these must be added to the polarimetric_constants dictionary. From the constants in the dictionary already, one can see the general naming convention pattern which must be followed. This convention is coefficient_filter_epoch where coefficient is one of q_zero, u_zero, k, or inst_depol, filter is one of B,V,R,I,L, and epoch is an increasing integer. 
+
+### moptop_settings.py
+
+Each setting in this file must be completed carefully in order to produce expected results.
+
+The first setting, dir1, is main directory path to where the individual fits files will be or are already stored. This pipeline is designed to download and open, or just open, fits files located in this directory and move them to a newly created folder of name matching that in the source_info dictionary. It is advised you allow the pipeline to create the filing structure in order to not save fits files or CSVs in places the code cannot find.  
+
+---
+
+## Acknowledgments 
+
+Thank you to Manisha Shrestha, Helen Jermak, Iain Steele for assisting in the starting and continuous development of this pipeline.
+
+Thank you to K-Ryan Hinds for sharing a web-scraping script to automate the data download process from the Liverpool Telescope recent data webpage.
+
+Thank you to James Pryce for helping to QA and troubleshoot the early version of this pipeline.
 
 ---
 
