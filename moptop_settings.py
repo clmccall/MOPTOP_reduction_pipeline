@@ -28,9 +28,9 @@ time_frame = '*'    #If you want to reduce specific files, enter the fits file d
                     #If you want to reduce all files, enter '*'
 
 stacking = 'y'  #This will check all files for any that should be rotation stacked (same run number but different rotation number in filenames).
-                #Will also check if any files have data in one camera but not the other, and reduce in single camera mode after stacking.
-
+                
 reduce = 'y' #Performs the data reduction (y/n)
+             #Will also check if any files have data in one camera but not the other, and reduce in single camera mode after stacking.
 plot = 'n' #Whether or not to display a finding chart plot in the reduction stage (y/n)
 optimum_aperture = 'y' #Whether or not to find the optimum aperture/annulus size for the source (y/n)
 replace = 'y' #If a file has already been reduced, whether or not to replace the old reduction with a new one (y/n)
