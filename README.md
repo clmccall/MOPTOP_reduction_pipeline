@@ -20,6 +20,8 @@ MOPTOP reduction pipeline
 
 The code provides a Python pipeline for downloading, calibrating, and reducing photopolarimetric data taken with the MOPTOP polarimeter on the Liverpool Telescope.  
 
+Please cite McCall 2025 (thesis) if using this pipeline or the work within it. 
+
 ### How to use
 
 Clone or download the repo. Both can be done by clicking the "code" button found at the top of the repo. To clone the repo using Git, run the command "git clone URL", where URL is the repo HTTPS URL, on your machine. To download a local version, click "Download ZIP". 
@@ -96,7 +98,35 @@ If new MOPTOP polarisation constants have been calculated following MOPTOP-alter
 
 Each setting in this file must be completed carefully in order to produce expected results.
 
-The first setting, dir1, is main directory path to where the individual fits files will be or are already stored. This pipeline is designed to download and open, or just open, fits files located in this directory and move them to a newly created folder of name matching that in the source_info dictionary. It is advised you allow the pipeline to create the filing structure in order to not save fits files or CSVs in places the code cannot find.  
+The first setting, dir1, is main directory path to where the individual fits files will be or are already stored. This pipeline is designed to download and open, or just open, fits files located in this directory and move them to a newly created folder of name matching that in the source_info dictionary. Subsequent CSV files will also be saved in this location. It is advised to allow the pipeline to create the filing structure in order to save fits files and CSVs in places the code is set up to find.  
+
+change_pol_constants is a list of MJDs which tells the pipeline which set of polarisations coefficients to use. If new ones are added to the polarimetric_constants dictionary, the MJD of when they take effect must be added to the end of this list. 
+
+Similarly, single_camera_start and single_camera_end are two lists of MJDs which tell the pipeline when to use the single and dual camera reduction methods. Should data be collected when MOPTOP only have one working camera, an MJD must be added to both lists. It is advised to set the end MJD to an arbitrarily distance value and correct it when the second camera is back online. 
+
+The sources list is a list of source names to reduce. These names must be as they appear in the source_info dictionary. This list is only needed when NOT downloading new data. It will be overwritten if downloading new data from the archive.
+
+no_wcs_sources is a list of sources which likely do not have a successful WCS fit, triggering the manual coordinate function. This function will check if a WCS fit has been unsuccessful before displaying a GUI allowing one to right click the source, followed by the calibration star, obtaining pixel coordinates. Only the first frame from each (rotation stacked) camera/filter will be shown as it is assumed the sources do not drift across the frame during an observation. The determined pixel coordinates are saved in an outputted CSV and read again to avoid repeating this process.
+
+The download_data toggle takes a "y" or "n" input and tells the pipeline whether to download new data from the Liverpool Telescope recent data webpage. If set to "y", at least one date (string; YYYYMMDD) must be given in the download_dates list, as well as at least one set of proposal IDs and passwords in the proposal dictionary. Multiple of each can be specified.
+
+The time_frame parameter allows one to specify specific observations to reduce. For example, if observations for 20250101 and 20150102 existed in the directory, one could set this parameter to "20250101_*" to reduce all the data from 20250101 and not 20250102 using the wildcard, *, character. Furthermore, if two observation runs took place on 20250101 - run 14 and 15 (e.g. different filters) - but only one needed to be reduced (run 14), one could specify this using "20250101_14".
+
+The stacking toggle will allowing the user to switch on and off the rotation stacking function should this not be needed (i.e. with GRB observations a higher time resolution may be required). The stacking works by finding frames with the same date and run number but different rotation numbers. The median of these frames in corresponding waveplate positions is calculated and saved as a new file. The unstacked files are removed. This is because the new file has the same name as those frames of rotation 1 and so one does not want to accidentally stack them again.
+
+The reduce toggle switches on and off the main reduction process. The pipeline will automatically choose the single camera vs. dual camera method. This function performs the raw photometry and baseline polarimetry, resulting in instrumental magnitudes and un-corrected q-u values. One may want to switch this off if changes to subsequent functions are introduced (e.g. new polarisation constants for an already reduced epoch). The results from this process are outputted to a CSV called "reduced_data.csv".
+
+The plot toggle switches on and off a display of the first waveplate position frame of each camera and filter with aperture and background annulus displayed. This is to check the positioning is correct.
+
+The optimum_aperture toggle switches on and off the optimum aperture function. This function performs object detection and refines the user inputted RA/Dec coordinates by looking for the closest source. It then tries a series of aperture/annulus sizes, selecting the configuration with the lowest SNR. The function does this for the first waveplate position frame for each camera/filter/rotation number. This function will work with those manually selected coordinates for frames with poor WCS fitting.
+
+The replace toggle switches on and off the function that allows the user to specify whether they want to re-reduce data that has already been done before. 
+
+The clear_dir1 toggle switches on and off the function that removes all fits files from dir1 and all child directories within.  
+
+The calculations toggle switches on and off the calibration of the data within "reduced_data.csv". This process calibrates magnitude and q-u values, as well as calculating flux, linear polarisation degree, and unwrapped EVPA. The results of this process are outputted to a new CSV called "all_data.csv". This is the final output of the pipeline.
+
+One can specify the number of EVPA values to include in the EVPA weighted average using the evpa_steps parameter. This is set to 3, but can take the form of any integer. This pipeline uses a novel approach to unwrap EVPA data, details of which can be found in McCall 2025 thesis.
 
 ---
 
