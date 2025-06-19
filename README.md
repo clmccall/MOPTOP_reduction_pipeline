@@ -70,6 +70,7 @@ While this script uses the moptop_settings.py and moptop_dicts.py files, it is n
 The input for this file is the final output of the main pipeline, so one is required to do a "dummy" run of the main pipeline for polarisation calibration data. This run obtains the required uncorrected q and u parameters for the polarisation calibration pipeline and potentially non-sensical "calibrated" values in the case where true coefficients have not yet been determined. These can be ignored.
 
 The main pipeline does not take into account the uncertainties on these constants, but it is recommended to produce values at the start of each epoch until the respective outputs are consistent within uncertainties. This may take several weeks of standard star observations which are obtained through the Liverpool Telescope operations MOPStand proposal. The values published on the Liverpool Telescope website (https://telescope.astro.ljmu.ac.uk/TelInst/Inst/MOPTOP/) originate from this work. 
+
 ---
 
 ## Instructions 
@@ -80,7 +81,7 @@ The main pipeline does not take into account the uncertainties on these constant
 
 ## Contact
 
-Email
+Email:
 
 c.mccall@2017.ljmu.ac.uk
 
