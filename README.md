@@ -20,7 +20,7 @@ MOPTOP reduction pipeline
 
 The code provides a Python pipeline for downloading, calibrating, and reducing photopolarimetric data taken with the MOPTOP polarimeter on the Liverpool Telescope.  
 
-Please cite McCall 2025 (thesis) if using this pipeline or the work within it. 
+Please cite McCall (2025) (https://researchonline.ljmu.ac.uk/id/eprint/26800/) if using this pipeline or the work within it. 
 
 ### How to use
 
@@ -126,7 +126,7 @@ The clear_dir1 toggle switches on and off the function that removes all fits fil
 
 The calculations toggle switches on and off the calibration of the data within "reduced_data.csv". This process calibrates magnitude and q-u values, as well as calculating flux, linear polarisation degree, and unwrapped EVPA. The results of this process are outputted to a new CSV called "all_data.csv". This is the final output of the pipeline.
 
-One can specify the number of EVPA values to include in the EVPA weighted average using the evpa_steps parameter. This is set to 3, but can take the form of any integer. This pipeline uses a novel approach to unwrap EVPA data, details of which can be found in McCall 2025 thesis.
+One can specify the number of EVPA values to include in the EVPA weighted average using the evpa_steps parameter. This is set to 3, but can take the form of any integer. This pipeline uses a novel approach to unwrap EVPA data, details of which can be found in McCall (2025).
 
 ---
 
