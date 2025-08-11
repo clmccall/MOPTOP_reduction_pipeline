@@ -59,7 +59,9 @@ all_pol_data = []
 for source in pol_sources:
     try:
         data = pd.read_csv(mopset.dir1+source+'/all_data.csv')
-        data = data[data['photometric']=="PHOTOMETRIC"]
+        data = data[data['photometric'] == "PHOTOMETRIC"]
+        data = data[(data['q_avg'] > -0.1) & (data['u_avg'] > -0.1)]
+        data = data[(data['q_avg'] < 0.1) & (data['u_avg'] < 0.1)]
         data['Source'] = source
         all_pol_data.append(data)
     except:

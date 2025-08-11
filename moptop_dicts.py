@@ -594,7 +594,7 @@ polarimetric_constants = {
     "u_zero_V_4" : -0.0248,
     "q_zero_R_4" : 0.0109,
     "u_zero_R_4" : -0.0319,
-    "q_zero_I_4" : 0.0109,
+    "q_zero_I_4" : 0.0112,
     "u_zero_I_4" : -0.0344,
     "q_zero_L_4" : 0.0084,
     "u_zero_L_4" : -0.0203,
