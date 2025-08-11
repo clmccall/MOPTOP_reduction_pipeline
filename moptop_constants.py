@@ -11,13 +11,15 @@ warnings.simplefilter('ignore', category=AstropyWarning)
 pd.options.mode.chained_assignment = None  # default='warn'
 
 pol_sources = ['HD251204','BD+64 106','VICyg12','BD+57 2615','HD155197', 'HILT960']
-zpol_sources = ['HD14069','BD+32 3739','GD319','HD212311','G191B2B','BD+28 4211']
+zpol_sources = ['HD14069','BD+32 3739','HD212311','G191B2B','BD+28 4211'] #GD319
 
 all_zpol_data = []
 for source in zpol_sources:
     try:
         data = pd.read_csv(mopset.dir1+source+'/all_data.csv')
-        data = data[data['photometric']=="PHOTOMETRIC"]
+        data = data[data['photometric'] == "PHOTOMETRIC"]
+        data = data[(data['q_avg'] > -0.1) & (data['u_avg'] > -0.1)]
+        data = data[(data['q_avg'] < 0.1) & (data['u_avg'] < 0.1)]
         data['Source'] = source
         all_zpol_data.append(data)
     except:
